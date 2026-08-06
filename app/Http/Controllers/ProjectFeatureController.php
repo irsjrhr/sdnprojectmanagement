@@ -5,20 +5,9 @@ use App\Models\ProjectFeature;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ProjectFeatureController extends Controller implements HasMiddleware
+class ProjectFeatureController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.features', only: ['index', 'show']),
-            new Middleware('can:create.features', only: ['create', 'store']),
-            new Middleware('can:update.features', only: ['edit', 'update']),
-            new Middleware('can:delete.features', only: ['destroy']),
-        ];
-    }
 
     public function index()
     {

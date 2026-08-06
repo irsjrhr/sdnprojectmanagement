@@ -5,17 +5,9 @@ use App\Models\ProjectFeature;
 use App\Models\ProjectFeatureComment;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ProjectFeatureCommentController extends Controller implements HasMiddleware
+class ProjectFeatureCommentController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.features', only: ['store']),
-        ];
-    }
 
     public function store(Request $request, ProjectFeature $projectFeature)
     {

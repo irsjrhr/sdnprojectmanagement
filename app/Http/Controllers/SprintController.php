@@ -5,20 +5,9 @@ use App\Models\Sprint;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class SprintController extends Controller implements HasMiddleware
+class SprintController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.sprints', only: ['index', 'show']),
-            new Middleware('can:create.sprints', only: ['create', 'store']),
-            new Middleware('can:update.sprints', only: ['edit', 'update']),
-            new Middleware('can:delete.sprints', only: ['destroy']),
-        ];
-    }
 
     public function index()
     {

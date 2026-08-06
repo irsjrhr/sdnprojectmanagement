@@ -8,20 +8,9 @@ use App\Models\Sprint;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class TaskController extends Controller implements HasMiddleware
+class TaskController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.tasks', only: ['index', 'show', 'index_async']),
-            new Middleware('can:create.tasks', only: ['create', 'store']),
-            new Middleware('can:update.tasks', only: ['edit', 'update']),
-            new Middleware('can:delete.tasks', only: ['destroy']),
-        ];
-    }
 
     public function index(\Illuminate\Http\Request $request)
     {

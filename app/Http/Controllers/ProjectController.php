@@ -5,20 +5,9 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class ProjectController extends Controller implements HasMiddleware
+class ProjectController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.projects', only: ['index', 'show']),
-            new Middleware('can:create.projects', only: ['create', 'store']),
-            new Middleware('can:update.projects', only: ['edit', 'update']),
-            new Middleware('can:delete.projects', only: ['destroy']),
-        ];
-    }
 
     public function index()
     {

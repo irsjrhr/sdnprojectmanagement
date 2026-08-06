@@ -5,17 +5,9 @@ use App\Models\Task;
 use App\Models\TaskComment;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class TaskCommentController extends Controller implements HasMiddleware
+class TaskCommentController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.tasks', only: ['store']),
-        ];
-    }
 
     public function store(Request $request, Task $task)
     {

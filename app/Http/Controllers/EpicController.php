@@ -5,20 +5,9 @@ use App\Models\Epic;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class EpicController extends Controller implements HasMiddleware
+class EpicController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.epics', only: ['index', 'show']),
-            new Middleware('can:create.epics', only: ['create', 'store']),
-            new Middleware('can:update.epics', only: ['edit', 'update']),
-            new Middleware('can:delete.epics', only: ['destroy']),
-        ];
-    }
 
     public function index()
     {

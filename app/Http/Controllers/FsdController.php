@@ -3,20 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Fsd;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
-use Illuminate\Routing\Controllers\Middleware;
 
-class FsdController extends Controller implements HasMiddleware
+class FsdController extends Controller
 {
-    public static function middleware(): array
-    {
-        return [
-            new Middleware('can:read.fsds', only: ['index', 'show', 'index_async']),
-            new Middleware('can:create.fsds', only: ['create', 'store']),
-            new Middleware('can:update.fsds', only: ['edit', 'update']),
-            new Middleware('can:delete.fsds', only: ['destroy']),
-        ];
-    }
     public function index()
     {
         if (request()->has('per_page')) {
