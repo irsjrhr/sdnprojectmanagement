@@ -1,0 +1,127 @@
+@extends('layouts.app')
+@section('title','FSDs')
+@section('page_title','Functional Specification Documents')
+
+@section('content')
+@include('_partials.flash')
+<style>
+    .toolbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;}
+    .btn-primary{padding:10px 20px;background:linear-gradient(135deg,#0891b2,#2563eb);color:#fff;border:none;border-radius:10px;text-decoration:none;font-weight:600;}
+    .table-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+    table{width:100%;border-collapse:collapse}
+    thead{background:linear-gradient(135deg,#f8fafc,#f1f5f9)}
+    th{padding:13px 16px;text-align:left;font-size:.78rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.5px;}
+    td{padding:14px 16px;border-top:1px solid #f1f5f9;font-size:.9rem;color:#334155;vertical-align:middle}
+    .empty-state{text-align:center;padding:60px 20px;color:#94a3b8}
+    .action-links{display:flex;gap:12px;align-items:center}
+    .action-links a{color:#0891b2;text-decoration:none;font-weight:600;font-size:.85rem}
+    .action-links a:hover{text-decoration:underline}
+    .btn-delete{background:none;border:none;color:#ef4444;font-weight:600;font-size:.85rem;cursor:pointer;padding:0}
+    .btn-delete:hover{text-decoration:underline}
+</style>
+<div class="toolbar">
+    <div style="display:flex; gap:12px; align-items:center;">
+        <input type="text" id="filterSearch" placeholder="Search FSDs..." style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; font-size: 0.9rem; min-width: 250px;">
+        <select id="filterStatus" style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none; font-size: 0.9rem;">
+            <option value="">All Statuses</option>
+            <option value="Draft">Draft</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+        <button id="btnSubmitFilter" class="btn-primary" style="padding: 8px 16px;">Filter</button>
+        <button id="btnResetFilter" style="padding: 8px 16px; background:#f1f5f9; color:#475569; border:none; border-radius:8px; cursor:pointer; font-weight:600;">Reset</button>
+    </div>
+    <a href="{{ route('fsds.create') }}" class="btn-primary">＋ New FSD</a>
+</div>
+<div class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th style="text-align:right">Action</th>
+            </tr>
+        </thead>
+        <tbody id="fsd-table-body">
+            <!-- Async Content here -->
+        </tbody>
+    </table>
+    <div style="padding:16px 20px;border-top:1px solid #f1f5f9; display:flex; justify-content: space-between; align-items: center;">
+        <div id="pagination-container">
+            <!-- Pagination Async -->
+        </div>
+        <div>
+            <form id="perPageForm" style="margin: 0;">
+                <select name="per_page" id="perPageSelect" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; color: #475569; font-size: 0.85rem; outline: none; cursor: pointer; background: #fff;">
+                    @php $cpp = session('global_per_page', 20); @endphp
+                    <option value="20" {{ $cpp == 20 ? 'selected' : '' }}>20 per page</option>
+                    <option value="50" {{ $cpp == 50 ? 'selected' : '' }}>50 per page</option>
+                    <option value="100" {{ $cpp == 100 ? 'selected' : '' }}>100 per page</option>
+                    <option value="all" {{ $cpp === 'all' ? 'selected' : '' }}>Show All</option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    
+    function getFilterUrl(baseUrl = `{{ route('fsds.index_async') }}`) {
+        let url = new URL(baseUrl, window.location.origin);
+        url.searchParams.set('per_page', $('#perPageSelect').val());
+        
+        let search = $('#filterSearch').val();
+        if(search) url.searchParams.set('search', search);
+        
+        let status = $('#filterStatus').val();
+        if(status) url.searchParams.set('status', status);
+        
+        return url.toString();
+    }
+
+    function loadFsds(url) {
+        $('#fsd-table-body').html('<tr><td colspan="5"><div style="text-align:center; padding: 40px; color: #64748b;">Loading FSDs...</div></td></tr>');
+        
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                $('#fsd-table-body').html(response.html);
+                $('#pagination-container').html(response.pagination);
+            },
+            error: function() {
+                $('#fsd-table-body').html('<tr><td colspan="5"><div style="text-align:center; padding: 40px; color: #ef4444;">Failed to load FSDs.</div></td></tr>');
+            }
+        });
+    }
+
+    // Initial Load
+    loadFsds(getFilterUrl());
+
+    // Filter Events
+    $('#btnSubmitFilter').on('click', function() { loadFsds(getFilterUrl()); });
+    $('#btnResetFilter').on('click', function() {
+        $('#filterSearch').val('');
+        $('#filterStatus').val('');
+        loadFsds(getFilterUrl());
+    });
+    
+    $('#filterSearch').on('keypress', function(e) {
+        if(e.which === 13) loadFsds(getFilterUrl());
+    });
+
+    $('#perPageSelect').on('change', function() { loadFsds(getFilterUrl()); });
+
+    $(document).on('click', '#pagination-container a', function(e) {
+        e.preventDefault();
+        loadFsds($(this).attr('href'));
+    });
+});
+</script>
+@endpush
+@endsection
