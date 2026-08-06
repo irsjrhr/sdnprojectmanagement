@@ -14,10 +14,10 @@ class BlueprintController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read blueprints', only: ['index', 'show', 'index_async']),
-            new Middleware('can:create blueprints', only: ['create', 'store']),
-            new Middleware('can:update blueprints', only: ['edit', 'update']),
-            new Middleware('can:delete blueprints', only: ['destroy']),
+            new Middleware('can:read.blueprints', only: ['index', 'show', 'index_async']),
+            new Middleware('can:create.blueprints', only: ['create', 'store']),
+            new Middleware('can:update.blueprints', only: ['edit', 'update']),
+            new Middleware('can:delete.blueprints', only: ['destroy']),
         ];
     }
 

@@ -16,10 +16,10 @@ class TaskController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read tasks', only: ['index', 'show', 'index_async']),
-            new Middleware('can:create tasks', only: ['create', 'store']),
-            new Middleware('can:update tasks', only: ['edit', 'update']),
-            new Middleware('can:delete tasks', only: ['destroy']),
+            new Middleware('can:read.tasks', only: ['index', 'show', 'index_async']),
+            new Middleware('can:create.tasks', only: ['create', 'store']),
+            new Middleware('can:update.tasks', only: ['edit', 'update']),
+            new Middleware('can:delete.tasks', only: ['destroy']),
         ];
     }
 

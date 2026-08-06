@@ -12,10 +12,10 @@ class ErdController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read erds', only: ['index', 'show']),
-            new Middleware('can:create erds', only: ['create', 'store']),
-            new Middleware('can:update erds', only: ['edit', 'update']),
-            new Middleware('can:delete erds', only: ['destroy']),
+            new Middleware('can:read.erds', only: ['index', 'show']),
+            new Middleware('can:create.erds', only: ['create', 'store']),
+            new Middleware('can:update.erds', only: ['edit', 'update']),
+            new Middleware('can:delete.erds', only: ['destroy']),
         ];
     }
     public function index()

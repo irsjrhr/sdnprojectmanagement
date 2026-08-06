@@ -13,10 +13,10 @@ class SprintController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read sprints', only: ['index', 'show']),
-            new Middleware('can:create sprints', only: ['create', 'store']),
-            new Middleware('can:update sprints', only: ['edit', 'update']),
-            new Middleware('can:delete sprints', only: ['destroy']),
+            new Middleware('can:read.sprints', only: ['index', 'show']),
+            new Middleware('can:create.sprints', only: ['create', 'store']),
+            new Middleware('can:update.sprints', only: ['edit', 'update']),
+            new Middleware('can:delete.sprints', only: ['destroy']),
         ];
     }
 

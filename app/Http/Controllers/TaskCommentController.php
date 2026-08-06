@@ -13,7 +13,7 @@ class TaskCommentController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read tasks', only: ['store']),
+            new Middleware('can:read.tasks', only: ['store']),
         ];
     }
 

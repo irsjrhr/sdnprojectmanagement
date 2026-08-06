@@ -13,10 +13,10 @@ class ProjectFeatureController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('can:read features', only: ['index', 'show']),
-            new Middleware('can:create features', only: ['create', 'store']),
-            new Middleware('can:update features', only: ['edit', 'update']),
-            new Middleware('can:delete features', only: ['destroy']),
+            new Middleware('can:read.features', only: ['index', 'show']),
+            new Middleware('can:create.features', only: ['create', 'store']),
+            new Middleware('can:update.features', only: ['edit', 'update']),
+            new Middleware('can:delete.features', only: ['destroy']),
         ];
     }
 
