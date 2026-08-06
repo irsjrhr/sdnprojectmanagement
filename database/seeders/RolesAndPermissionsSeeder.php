@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Models\User;
+use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -15,37 +16,79 @@ class RolesAndPermissionsSeeder extends Seeder
     public function run(): void
     {
         // Reset cached roles and permissions
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Delete obsolete legacy permissions first
         $obsoletePermissions = [
-            'manage projects', 'manage epics', 'manage sprints', 'manage tasks',
-            'manage roles', 'manage permissions',
-            'manage features', 'view features', 'create features (old)',
-            'manage blueprints', 'view blueprints',
-            'manage brd',
-            'update tasks', // old standalone
-            'edit feature gap',
-            'access roadmap',
-            'access kanban',
+            'manage.projects',
+            'manage.epics',
+            'manage.sprints',
+            'manage.tasks',
+            'manage.roles',
+            'manage.permissions',
+            'manage.features',
+            'view.features',
+            'create.features',
+            'manage.blueprints',
+            'view.blueprints',
+            'manage.brd',
+            'update.tasks',
+            'edit.feature',
+            'read.roadmap',
+            'read.kanban',
         ];
         Permission::whereIn('name', $obsoletePermissions)->delete();
 
         // Create granular CRUD permissions
         $permissions = [
-            'create roles', 'read roles', 'update roles', 'delete roles',
-            'create permissions', 'read permissions', 'update permissions', 'delete permissions',
-            'create projects', 'read projects', 'update projects', 'delete projects',
-            'create epics', 'read epics', 'update epics', 'delete epics',
-            'create sprints', 'read sprints', 'update sprints', 'delete sprints',
-            'create tasks', 'read tasks', 'update tasks', 'delete tasks',
-            'read kanban', 'update kanban',
-            'read roadmap', 'update roadmap',
-            'create features', 'read features', 'update features', 'delete features',
-            'create blueprints', 'read blueprints', 'update blueprints', 'delete blueprints',
-            'create brd', 'read brd', 'update brd', 'delete brd',
-            'create erds', 'read erds', 'update erds', 'delete erds',
-            'create fsds', 'read fsds', 'update fsds', 'delete fsds',
+            'create.roles',
+            'read.roles',
+            'update.roles',
+            'delete.roles',
+            'create.permissions',
+            'read.permissions',
+            'update.permissions',
+            'delete.permissions',
+            'create.projects',
+            'read.projects',
+            'update.projects',
+            'delete.projects',
+            'create.epics',
+            'read.epics',
+            'update.epics',
+            'delete.epics',
+            'create.sprints',
+            'read.sprints',
+            'update.sprints',
+            'delete.sprints',
+            'create.tasks',
+            'read.tasks',
+            'update.tasks',
+            'delete.tasks',
+            'read.kanban',
+            'update.kanban',
+            'read.roadmap',
+            'update.roadmap',
+            'create.features',
+            'read.features',
+            'update.features',
+            'delete.features',
+            'create.blueprints',
+            'read.blueprints',
+            'update.blueprints',
+            'delete.blueprints',
+            'create.brd',
+            'read.brd',
+            'update.brd',
+            'delete.brd',
+            'create.erds',
+            'read.erds',
+            'update.erds',
+            'delete.erds',
+            'create.fsds',
+            'read.fsds',
+            'update.fsds',
+            'delete.fsds',
         ];
 
         foreach ($permissions as $permission) {
@@ -60,22 +103,39 @@ class RolesAndPermissionsSeeder extends Seeder
         // Assign Permissions to Roles
         // Developer
         $developer->syncPermissions([
-            'read projects',
-            'read epics',
-            'read sprints',
-            'create tasks', 'read tasks', 'update tasks', 'delete tasks',
-            'read kanban', 'update kanban',
-            'read roadmap',
-            'read features',
-            'read blueprints',
-            'create brd', 'read brd', 'update brd', 'delete brd',
+            'create.projects',
+            'read.projects',
+            'update.projects',
+            'delete.projects',
+            'create.epics',
+            'read.epics',
+            'update.epics',
+            'delete.epics',
+            'create.sprints',
+            'read.sprints',
+            'update.sprints',
+            'delete.sprints',
+            'create.tasks',
+            'read.tasks',
+            'update.tasks',
+            'delete.tasks',
+            'read.kanban',
+            'update.kanban',
+            'read.roadmap',
+            'read.features',
+            'read.blueprints',
+            'create.brd',
+            'read.brd',
+            'update.brd',
+            'delete.brd',
         ]);
 
         // Client
         $client->syncPermissions([
-            'read projects',
-            'read blueprints',
-            'create features', 'read features',
+            'read.projects',
+            'read.blueprints',
+            'create.features',
+            'read.features',
         ]);
 
         // Note: Super Admin bypasses permissions via Gate::before in AppServiceProvider

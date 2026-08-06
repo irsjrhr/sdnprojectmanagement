@@ -70,16 +70,6 @@ Setiap dokumen FSD harus memuat 6 bagian (*section*) berikut secara berurutan. F
 
 ---
 
-## 4. Disiplin Terminologi (No SAP Terminology)
-Hindari penggunaan bahasa atau tabel spesifik *legacy* SAP (seperti `KUNNR`, `OBYC`, `BSEG`, `MIGO`) di seluruh dokumentasi BRD maupun FSD. Gunakan padanan istilah *Enterprise* yang universal dan mudah dipahami, contoh:
-- Customer (bukan KUNNR)
-- Material / Item (bukan MATNR)
-- General Ledger / Accounting (bukan FI/CO)
-- Auto Posting Mapping (bukan OBYC) 
-
 ## 5. Sinkronisasi (Domino Effect)
 Apabila ada penambahan modul / penyisipan tahapan baru di dalam *Implementation Plan*, seluruh nomor dokumen di belakangnya wajib diurutkan ulang (*Domino Effect +1*). Hubungan referensi antara BRD dan FSD bersifat **1:1**.
 
-
-## 6. Organizational Structure (Simplification)
-Entitas **Branch** (Cabang) telah ditetapkan sebagai entitas tunggal yang merangkap seluruh peran fungsional operasional. Oleh karena itu, dilarang merancang atau merujuk pada entitas terpisah untuk **"Business Area"**, **"Plant"**, ataupun **"Sales Office"**. Seluruh atribut operasional dan finansial bermuara langsung pada entitas Branch.
