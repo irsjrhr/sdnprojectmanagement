@@ -409,129 +409,97 @@
             </ul>
 
             {{-- User Management --}}
-            @canany(['read roles', 'read permissions'])
             <div class="menu-group-label">User Management</div>
             <ul class="menu-list">
-                @can('read roles')
                 <li class="menu-item {{ request()->is('roles*') ? 'active' : '' }}">
                     <a href="{{ url('/roles') }}" data-label="Master Roles">
                         <span class="menu-icon">🛡️</span>
                         <span class="menu-label">Master Roles</span>
                     </a>
                 </li>
-                @endcan
-                @can('read permissions')
                 <li class="menu-item {{ request()->is('permissions*') ? 'active' : '' }}">
                     <a href="{{ url('/permissions') }}" data-label="Master Permissions">
                         <span class="menu-icon">🔑</span>
                         <span class="menu-label">Master Permissions</span>
                     </a>
                 </li>
-                @endcan
             </ul>
-            @endcan
 
             {{-- Project Management --}}
-            @canany(['read projects', 'read epics', 'read sprints', 'read tasks', 'read kanban', 'read features', 'read roadmap'])
             <div class="menu-group-label">Project Management</div>
             <ul class="menu-list">
-                @can('read projects')
                 <li class="menu-item {{ request()->is('projects*') ? 'active' : '' }}">
                     <a href="{{ url('/projects') }}" data-label="Projects">
                         <span class="menu-icon">📁</span>
                         <span class="menu-label">Projects</span>
                     </a>
                 </li>
-                @endcan
-                @can('read roadmap')
                 <li class="menu-item {{ request()->is('roadmap*') ? 'active' : '' }}">
                     <a href="{{ url('/roadmap') }}" data-label="Roadmap">
                         <span class="menu-icon">🗺️</span>
                         <span class="menu-label">Roadmap (Gantt)</span>
                     </a>
                 </li>
-                @endcan
-                @can('read epics')
                 <li class="menu-item {{ request()->is('epics*') ? 'active' : '' }}">
                     <a href="{{ url('/epics') }}" data-label="Epics">
                         <span class="menu-icon">🎯</span>
                         <span class="menu-label">Epics</span>
                     </a>
                 </li>
-                @endcan
-                @can('read sprints')
                 <li class="menu-item {{ request()->is('sprints*') ? 'active' : '' }}">
                     <a href="{{ url('/sprints') }}" data-label="Sprints">
                         <span class="menu-icon">🏃</span>
                         <span class="menu-label">Sprints</span>
                     </a>
                 </li>
-                @endcan
-                @can('read tasks')
                 <li class="menu-item {{ request()->is('tasks*') ? 'active' : '' }}">
                     <a href="{{ url('/tasks') }}" data-label="Tasks">
                         <span class="menu-icon">✅</span>
                         <span class="menu-label">Tasks</span>
                     </a>
                 </li>
-                @endcan
-                @can('read kanban')
                 <li class="menu-item {{ request()->is('kanban*') ? 'active' : '' }}">
                     <a href="{{ url('/kanban') }}" data-label="Kanban Board">
                         <span class="menu-icon">🗂️</span>
                         <span class="menu-label">Kanban Board</span>
                     </a>
                 </li>
-                @endcan
-                @can('read features')
                 <li class="menu-item {{ request()->is('project-features*') ? 'active' : '' }}">
                     <a href="{{ url('/project-features') }}" data-label="Features">
                         <span class="menu-icon">⚡</span>
                         <span class="menu-label">Features</span>
                     </a>
                 </li>
-                @endcan
             </ul>
-            @endcan
 
             {{-- Documentation --}}
-            @canany(['read blueprints', 'read brd', 'read erds', 'read fsds'])
             <div class="menu-group-label">Documentation</div>
             <ul class="menu-list">
-                @can('read blueprints')
                 <li class="menu-item {{ request()->is('blueprints*') ? 'active' : '' }}">
                     <a href="{{ url('/blueprints') }}" data-label="Blueprints">
                         <span class="menu-icon">📐</span>
                         <span class="menu-label">Blueprints</span>
                     </a>
                 </li>
-                @endcan
-                @can('read brd')
                 <li class="menu-item {{ request()->is('brd-documents*') ? 'active' : '' }}">
                     <a href="{{ url('/brd-documents') }}" data-label="BRD Documents">
                         <span class="menu-icon">📋</span>
                         <span class="menu-label">BRD Documents</span>
                     </a>
                 </li>
-                @endcan
-                @can('read erds')
                 <li class="menu-item {{ request()->is('erds*') ? 'active' : '' }}">
                     <a href="{{ url('/erds') }}" data-label="ERD">
                         <span class="menu-icon">🗄️</span>
                         <span class="menu-label">ERD</span>
                     </a>
                 </li>
-                @endcan
-                @can('read fsds')
                 <li class="menu-item {{ request()->is('fsds*') ? 'active' : '' }}">
                     <a href="{{ url('/fsds') }}" data-label="FSD">
                         <span class="menu-icon">📝</span>
                         <span class="menu-label">FSD</span>
                     </a>
                 </li>
-                @endcan
             </ul>
-            @endcan
 
         </div>
 
