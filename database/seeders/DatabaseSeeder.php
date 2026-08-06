@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        //$this->call(UsersTableSeeder::class);
-        //this->call(RolesAndPermissionsSeeder::class); // <-- DIAKTIFKAN KEMBALI UNTUK UPDATE AKSES
+        $this->call(UsersTableSeeder::class);
+        $this->call(RolesAndPermissionsSeeder::class);
         //$this->call(ProjectsTableSeeder::class);
         //$this->call(EpicsTableSeeder::class);
         //$this->call(SprintsTableSeeder::class);

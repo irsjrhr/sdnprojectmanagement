@@ -83,7 +83,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // Assign Roles to Users
         $usersMap = [
             'teguh@arxino.com' => 'Super Admin',
-            'admin@arxino.com' => 'Super Admin',
+            'irshandy.hardadi@sdn.id' => 'Super Admin',
             'william@arxino.com' => 'Developer',
             'irshandy@arxino.com' => 'Developer',
             'rifki@arxino.com' => 'Developer',

@@ -33,10 +33,10 @@ class UsersTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Teguh Priyadi',
-                'email' => 'admin@arxino.com',
+                'name' => 'Irshandy Hardadi',
+                'email' => 'irshandy.hardadi@sdn.id',
                 'email_verified_at' => NULL,
-                'password' => '$2y$12$qQn8Jz1TYBxRHakaOAf/PuDH9g2EApk3B60kHlIAwuoHgnRqfQYFm',
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
                 'remember_token' => NULL,
                 'created_at' => '2026-07-20 05:30:20',
                 'updated_at' => '2026-07-20 05:30:20',

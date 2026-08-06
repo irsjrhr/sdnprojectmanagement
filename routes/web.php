@@ -35,12 +35,8 @@ Route::middleware(['auth'])->group(function () {
     // Project Management
     Route::resource('projects', ProjectController::class);
 
-    Route::middleware(['can:read roadmap'])->group(function () {
-        Route::get('/roadmap', [App\Http\Controllers\RoadmapController::class, 'index'])->name('roadmap.index');
-    });
-    Route::middleware(['can:update roadmap'])->group(function () {
-        Route::post('/roadmap/update-date', [App\Http\Controllers\RoadmapController::class, 'updateDate'])->name('roadmap.updateDate');
-    });
+    Route::get('/roadmap', [App\Http\Controllers\RoadmapController::class, 'index'])->name('roadmap.index');
+    Route::post('/roadmap/update-date', [App\Http\Controllers\RoadmapController::class, 'updateDate'])->name('roadmap.updateDate');
     
     Route::resource('epics', EpicController::class);
     
@@ -70,12 +66,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('project-features/{projectFeature}/feedback', [ProjectFeatureController::class, 'feedback'])->name('project-features.feedback');
 
     // Kanban
-    Route::middleware(['can:read kanban'])->group(function () {
-        Route::get('/kanban', [KanbanController::class, 'index'])->name('kanban.index');
-    });
-    Route::middleware(['can:update kanban'])->group(function () {
-        Route::post('/kanban/update-task', [KanbanController::class, 'updateTaskStatus'])->name('kanban.updateTaskStatus');
-    });
+    Route::get('/kanban', [KanbanController::class, 'index'])->name('kanban.index');
+    Route::post('/kanban/update-task', [KanbanController::class, 'updateTaskStatus'])->name('kanban.updateTaskStatus');
 
     // Documentation
     Route::get('brd-documents/index_async', [BrdDocumentController::class, 'index_async'])->name('brd-documents.index_async');
